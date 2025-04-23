@@ -6,7 +6,7 @@
 using namespace std;
 
 main(){
-	system("clear");
+	system("cls");
 	int a, b, c, d;
 	a=0&0;
 	b=0&1;
