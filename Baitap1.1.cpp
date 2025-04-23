@@ -7,7 +7,7 @@
 using namespace std;
 main()
 {
-	system("clear");
+	system("cls");//system("clear") dung cho Linux
 	int x=23, y;
 	y=x<<1;cout<<"Dich trai "<<x<<" di 1 bit= "<<y<<"; tuong duong 23*2^1=46"<<endl;
 	//y=46
