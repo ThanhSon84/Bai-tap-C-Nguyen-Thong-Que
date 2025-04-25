@@ -1,0 +1,78 @@
+Các cải tiến:
+Để cải tiến đoạn code này để in ra lộ trình (hoán vị) đạt giá trị Min cost, chúng ta cần lưu lại hoán vị tốt nhất trong quá trình tính toán.
+Cách làm là thêm một mảng lưu trữ lộ trình tốt nhất vào hàm copy_array. Dưới đây là phiên bản cải tiến:
+
+// Hàm sao chép mảng và tính toán chi phí
+void copy_array(int *a, int n) {
+    int i, sum = 0;
+    for (i = 0; i <= n; i++) {
+        sum += graph[a[i % 5]][a[(i + 1) % 5]];
+    }
+
+    // Nếu tìm được chi phí nhỏ hơn, cập nhật
+    if (cost > sum) {
+        cost = sum;
+        for (i = 0; i <= n; i++) {
+            best_path[i] = a[i];  // Sao chép hoán vị tốt nhất
+        }
+    }
+}
+
+
+// Hàm chính
+int main() {
+    system("cls");  // Xóa màn hình (trên Windows)
+    int a[] = {0, 1, 2, 3, 4};  // Các điểm trong đồ thị
+    permute(a, 0, 4);           // Tạo các hoán vị
+    
+    // In kết quả
+    cout << "Min cost = " << cost << endl;
+    cout << "Best path: ";
+    for (int i = 0; i < 5; i++) {
+        cout << best_path[i] << " ";
+    }
+    cout << endl;
+
+    cin.get();  // Chờ người dùng nhấn phím để kết thúc
+    return 0;
+}
+
+Cải tiến:
+- Thêm mảng best_path:- Mảng best_path[5] được dùng để lưu lại thứ tự các điểm trong lộ trình đạt chi phí nhỏ nhất.
+
+- Cập nhật best_path trong hàm copy_array:- Khi tìm được một hoán vị có chi phí thấp hơn giá trị hiện tại của cost, chương trình sẽ sao chép hoán vị này vào mảng best_path.
+
+- In lộ trình tốt nhất:- Lộ trình tốt nhất sẽ được in ra trong main().
+
+//------------------------------------------------------------------------------------------------??
+
+- In ra lộ trình và chi phí của từng hoán vị:- Dòng code:cout << "Current path: ";
+for (i = 0; i <= n; i++) {
+    cout << a[i] + 1 << " ";
+}
+cout << a[0] + 1 << " ";  // Quay lại điểm xuất phát
+cout << " | Cost: " << sum << endl;
+
+- Hiển thị mỗi hoán vị (bao gồm điểm quay lại điểm xuất phát) cùng với tổng chi phí.
+
+- Vẫn giữ nguyên tính toán Min cost và lộ trình tối ưu:- Sau khi tìm được một hoán vị có chi phí nhỏ hơn, chương trình vẫn cập nhật giá trị cost và lộ trình vào mảng best_path.
+
+- Chuyển sang 1-based index:- Khi in ra lộ trình, chương trình cộng thêm 1 vào chỉ số để phù hợp với yêu cầu hiển thị.
+
+
+
+Ví dụ kết quả:
+Trong quá trình chạy, chương trình có thể in ra như sau:
+Current path: 1 2 3 4 5 1  | Cost: 150
+Current path: 1 2 3 5 4 1  | Cost: 120
+Current path: 1 2 4 3 5 1  | Cost: 140
+...
+Min cost = 93
+Optimal path: 1 5 3 4 2 1
+
+
+
+Giải thích chi tiết:
+- Trong mỗi lần hoán vị, lộ trình hiện tại được in ra ngay lập tức, giúp người dùng kiểm tra quá trình tính toán.
+- Sau khi hoàn tất, kết quả chi phí tối ưu (Min cost) và lộ trình đạt được chi phí này được in ra.
+
